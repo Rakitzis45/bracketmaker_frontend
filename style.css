@@ -32,7 +32,12 @@ div.round2 {
     display: block;
 
 }
-
+.hidden-brackets{
+    display: none
+}
 .hidden-bracket {
+    display: none
+}
+.hidden {
     display: none
 }
