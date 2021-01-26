@@ -3,66 +3,84 @@
   <meta charset="UTF-8">
   <title>Bracket Maker</title>
   <script defer src="index.js"></script>
+  <script defer src="bracket.js"></script>
+  <script defer src="user.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>
     Welcome to the BracketMaker
   </h1>
+
+  <form class="">
+    <label for="fname">email:</label><br>
+    <input type="text" id="email" name="email"><br>
+    <input id=submitButton type="submit" value="Login">
+  </form>
+
+
+
+
+
+
+
+
   <h3>Your Brackets</h3>
   <ul class="bracketList">
   </ul>
 
+  <div class="hidden-bracket">
   <section id="bracket">
     <div class=round1>
       <h4 class=round-details>Quarters</h4>
-      <ul class="matchup-round-1">
-        <li class="team top-team">Team 1</li>
-        <li class="team bottom-team">Team 2</li>
+      <ul class="matchup-1">
+        <li class="team top-team" id="team1">Team 1</li>
+        <li class="team bottom-team" id="team2">Team 2</li>
       </ul>
-      <ul class="matchup-round-1">
-        <li class="team top-team">Team 1</li>
-        <li class="team bottom-team">Team 2</li>
+      <ul class="matchup-2">
+        <li class="team top-team" id="team3">Team 1</li>
+        <li class="team bottom-team" id="team4">Team 2</li>
       </ul>
-      <ul class="matchup-round-1">
-        <li class="team top-team">Team 1</li>
-        <li class="team bottom-team">Team 2</li>
+      <ul class="matchup-3">
+        <li class="team top-team" id="team5">Team 1</li>
+        <li class="team bottom-team" id="team6">Team 2</li>
       </ul>
-      <ul class="matchup-round-1">
-        <li class="team top-team">Team 1</li>
-        <li class="team bottom-team">Team 2</li>
+      <ul class="matchup-4">
+        <li class="team top-team"id="team7">Team 1</li>
+        <li class="team bottom-team"id="team8">Team 2</li>
       </ul>
     </div>
 
     <div class=round2>
       <div class="matchups">
       <h4 class=round-details>Semi-Finals</h4>
-      <ul class="matchup-round-2">
-        <li class="team top-team">EMPTY</li>
-        <li class="team bottom-team">EMPTY</li>
+      <ul class="matchup-5">
+        <li class="team top-team" id="team9">EMPTY</li>
+        <li class="team bottom-team" id="team10">EMPTY</li>
       </ul>
-      <ul class="matchup-round-2">
-        <li class="team top-team">EMPTY</li>
-        <li class="team bottom-team">EMPTY</li>
+      <ul class="matchup-6">
+        <li class="team top-team" id="team11">EMPTY</li>
+        <li class="team bottom-team" id="team12">EMPTY</li>
       </ul>
       </div>
     </div>
 
     <div class=round3>
       <h4 class=round-details>Finals</h4>
-      <ul class="matchup-round-3">
-        <li class="team top-team">EMPTY</li>
-        <li class="team bottom-team">EMPTY</li>
+      <ul class="matchup-7">
+        <li class="team top-team"id="team13">EMPTY</li>
+        <li class="team bottom-team" id="team14">EMPTY</li>
       </ul>
     </div>
 
     <div class=round4>
       <h4 class=round-details>Champion</h4>
-      <ul class="matchup-round-4">
-        <li class=" team Champion">EMPTY</li>
+      <ul>
+        <li class=" team Champion" id="team15">EMPTY</li>
       </ul>
     </div>
   </section>
+  </div>
 
 </body>
 </html>

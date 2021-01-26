@@ -20,6 +20,7 @@
     overflow: hidden;
     position: relative;
     text-align: center;
+    background-color: darkgray;
 }
 
 .matchup-round-1 {
@@ -32,3 +33,6 @@ div.round2 {
 
 }
 
+.hidden-bracket {
+    display: none
+}
