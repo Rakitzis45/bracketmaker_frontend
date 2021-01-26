@@ -1,5 +1,7 @@
 class User {
-    constructor(email){
+    constructor(id, email){
+        this.id = id
         this.email = email
-    }
+    } 
+
 }
