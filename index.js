@@ -2,29 +2,46 @@ let bracketList = document.querySelector(".bracketList")
 let hiddenBracket = document.querySelector("div.hidden-bracket")
 let matchup1 = document.querySelector(".matchup-1")
 let bracket = document.querySelector("section#bracket")
-
+let getBracketButton = document.getElementById("bracketsButton")
 let submitButton = document.getElementById("submitButton")
+let loginForm = document.querySelector(".loginForm")
 
 submitButton.addEventListener("click", login)
 bracket.addEventListener("click", moveTeam)
 bracketList.addEventListener('click', showBracket)
+getBracketButton.addEventListener('click', getYourBrackets)
 
+
+
+let user 
+function getYourBrackets(e){
+    fetchBrackets()
+}
 function login(e){
     e.preventDefault()
-    let email = document.getElementById("email").value
-    let user = new User(email)
-    findOrSignup(user)
-    debugger
+    let useremail = document.getElementById("email").value
+    console.log(useremail)
+    fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+           email: useremail
+        })
+        })
+        .then(resp => resp.json())
+        .then(function(json){
+            user = new User(json.id, json.email)
+            document.getElementById("useremail").innerHTML = `${user.email}`
+        })
+    loginForm.className = "hidden"
 }
 
-function findOrSignup(user){
-    debugger
-
-  
-}
 
 function fetchBrackets(){
-    fetch('http://localhost:3000/users/1')
+    fetch(`http://localhost:3000/users/${user.id}`)
     .then(resp => resp.json())
     .then(json => renderBracketNames(json))
 }
@@ -36,6 +53,7 @@ function fetchBracket(bracketId){
 }
 
 function renderBracketNames(user){
+    bracketList.innerHTML = ""
     user.brackets.forEach(bracket => {
         bracketList.innerHTML += `<li data-id = ${bracket.id}>${bracket.name}</li>`
     })
@@ -77,8 +95,5 @@ function moveTeam(e){
     } else if (e.target.parentNode.className === "matchup-7"){
         document.getElementById("team15").innerHTML = e.target.innerHTML
     } 
-
-
 }
 
-fetchBrackets()
