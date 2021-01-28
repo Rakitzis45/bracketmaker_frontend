@@ -19,13 +19,31 @@
     <input id=submitButton type="submit" value="Login">
   </form>
 
+  <form class=hidden id=newBracketForm>
+    <label for="name"> Name of Bracket:</label>
+    <input type="text" id="bracketName"><br>
+    <label for="team1">Team 1</label>
+    <input type="text" id="newteam1"><br>
+    <label for="team2">Team 2</label>
+    <input type="text" id="newteam2"><br>
+    <label for="team3">Team 3</label>
+    <input type="text" id="newteam3"><br>
+    <label for="team4">Team 4</label>
+    <input type="text" id="newteam4"><br>
+    <label for="team5">Team 5</label>
+    <input type="text" id="newteam5"><br>
+    <label for="team6">Team 6</label>
+    <input type="text" id="newteam6"><br>
+    <label for="team7">Team 7</label>
+    <input type="text" id="newteam7"><br>
+    <label for="team8">Team 8</label>
+    <input type="text" id="newteam8"><br>
+    <input type="submit" id=newBracketSubmit value="Create New Bracket">
+  </form>
 
-
-
-
-
-
-  <button id=bracketsButton>Your Brackets</button>
+  <button class='hidden' id=newBracketButton>Create Bracket</button>
+    <br>
+  <button class="hidden" id=bracketsButton>Your Brackets</button>
   <h3 class= hidden-brackets>Your Brackets</h3>
   <ul class="bracketList">
   </ul>
@@ -80,7 +98,9 @@
         <li class=" team Champion" id="team15">EMPTY</li>
       </ul>
     </div>
+
   </section>
+  <button id="updateBracketButton" >Submit changes</button>
   </div>
 
 </body>
