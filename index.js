@@ -9,7 +9,10 @@ let newBracketForm = document.getElementById("newBracketForm")
 let newBracketButton = document.getElementById("newBracketButton")
 let bracketSubmit = document.getElementById("newBracketSubmit")
 let updateBracketButton = document.getElementById("updateBracketButton")
+let searchBracketButton = document.getElementById("searchButton")
+let searchBracketContainer = document.getElementById('searchBracketContainer')
 
+searchBracketButton.addEventListener('click', searchBracket)
 submitButton.addEventListener("click", login)
 bracket.addEventListener("click", moveTeam)
 bracketList.addEventListener('click', showBracket)
@@ -19,8 +22,103 @@ newBracketButton.addEventListener('click', function(){
     newBracketForm.className = ""
 })
 updateBracketButton.addEventListener('click', updateBracket)
+
 let user 
 let currentBracket
+
+function searchBracket(e) {
+    e.preventDefault()
+    searchAllBrackets()
+}
+function searchAllBrackets(){
+    let bracketCode = parseInt(document.getElementById('bracketSearch').value)
+    fetch('http://localhost:3000/brackets')
+    .then(resp => resp.json())
+    .then(function(json){
+        let bracket = json.find(bracket => bracket.code === bracketCode)
+        let foundBracket = new Bracket(
+            bracket.id, 
+            bracket.name, 
+            8,
+            bracket.position1,
+            bracket.position2,
+            bracket.position3,
+            bracket.position4,
+            bracket.position5,
+            bracket.position6,
+            bracket.position7,
+            bracket.position8,
+            bracket.position9,
+            bracket.position10,
+            bracket.position11,
+            bracket.position12,
+            bracket.position13,
+            bracket.position14,
+            bracket.position15,
+            bracket.code,
+            bracket.user_id
+        )
+        searchBracketContainer.innerHTML = ""
+        let newSection = document.createElement('section')
+        newSection.id = 'bracket'
+        newSection.innerHTML = ` 
+            <div class=round1>
+            <h4 class=round-details>Quarters</h4>
+            <ul class="matchup-1">
+                <li class="team">${foundBracket.position1}</li>
+                <li class="team">${foundBracket.position2}</li>
+            </ul>
+            <ul class="matchup-2">
+                <li class="team">${foundBracket.position3}</li>
+                <li class="team">${foundBracket.position4}</li>
+            </ul>
+            <ul class="matchup-3">
+                <li class="team">${foundBracket.position5}</li>
+                <li class="team">${foundBracket.position6}</li>
+            </ul>
+            <ul class="matchup-4">
+                <li class="team">${foundBracket.position7}</li>
+                <li class="team">${foundBracket.position8}</li>
+            </ul>
+        </div>
+    
+        <div class=round2>
+            <div class="matchups">
+            <h4 class=round-details>Semi-Finals</h4>
+            <ul class="matchup-5">
+                <li class="team">${foundBracket.position9}</li>
+                <li class="team">${foundBracket.position10}</li>
+            </ul>
+            <ul class="matchup-6">
+                <li class="team">${foundBracket.position11}</li>
+                <li class="team">${foundBracket.position12}</li>
+            </ul>
+            </div>
+        </div>
+    
+        <div class=round3>
+            <h4 class=round-details>Finals</h4>
+            <ul class="matchup-7">
+                <li class="team">${foundBracket.position13}</li>
+                <li class="team">${foundBracket.position14}</li>
+            </ul>
+        </div>
+    
+        <div class=round4>
+            <h4 class=round-details>Champion</h4>
+            <ul>
+                <li class="team">${foundBracket.position15}</li>
+            </ul>
+        </div>
+        `     
+        searchBracketContainer.appendChild(newSection)
+    })
+    
+}
+
+
+
+
 
 function updateBracket(){
     currentBracket.position9 = document.getElementById('team9').innerHTML
@@ -64,6 +162,7 @@ function submitBracket(e){
         document.getElementById('newteam7').value,
         document.getElementById('newteam8').value
     )
+    newBracket.user_id = user.id
     fetch("http://localhost:3000/brackets", {
         method: "POST",
         headers: {
@@ -142,7 +241,7 @@ function fetchBracket(bracketId){
 function renderBracketNames(user){
     bracketList.innerHTML = ""
     user.brackets.forEach(bracket => {
-        bracketList.innerHTML += `<li data-id = ${bracket.id}>${bracket.name}</li>`
+        bracketList.innerHTML += `<li data-id = ${bracket.id}>${bracket.name}: Bracket Code: ${bracket.code}</li>`
     })
 }
 
@@ -160,7 +259,6 @@ function getTeamNames(bracket){
         bracket.position7,
         bracket.position8,
         bracket.code,
-        bracket.user_id
     )
     document.getElementById("team1").innerHTML = bracket.position1
     document.getElementById("team2").innerHTML = bracket.position2
@@ -186,7 +284,6 @@ function showBracket(e){
     hiddenBracket.className = ""
 
 }
-// && document.getElementById("team9").innerHTML === "EMPTY")
 function moveTeam(e){
     if (e.target.parentNode.className === "matchup-1"){
         document.getElementById("team9").innerHTML = e.target.innerHTML
